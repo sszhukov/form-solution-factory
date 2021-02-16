@@ -1,73 +1,77 @@
 <template>
   <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">
-        FormSolutionFactory
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+    <div class="title">
+      Добавить опрос
     </div>
+    <Condition
+      v-for="(condition, index) in conditions"
+      :key="index"
+      v-model="conditions[index]"
+      :conditions="staticConditions"
+      :num-index="index"
+      @input="getCondition"
+      @remove="remove(index)"
+    />
+    <ConditionAdding @click.native="addCondition" />
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data () {
+    return {
+      conditions: [],
+      staticConditions: [
+        {
+          id: 1,
+          name: 'Возраст респондента',
+          type: 'range',
+          optionName: 'Диапазон',
+          option: []
+        },
+        {
+          id: 2,
+          name: 'Тип карты лояльности',
+          type: 'single',
+          optionName: 'Тип',
+          options: [
+            { id: 1, name: 'Gold' },
+            { id: 2, name: 'Platinum' }
+          ]
+        }
+      ]
+    }
+  },
+  methods: {
+    addCondition () {
+      this.conditions.push({})
+    },
+    remove (index) {
+      this.conditions = this.conditions.filter((el, indx) => indx !== index)
+    }
+  }
+}
 </script>
 
-<style>
+<style lang="scss" scoped>
+
 .container {
-  margin: 0 auto;
-  min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin: 0 auto;
+  margin-left: 100px;
+  min-height: 100vh;
+
+  .title {
+    width: 100%;
+    padding: 10px 20px;
+    color: rgba(0, 0, 0, .2);
+    font-weight: bold;
+    text-align: left;
+  }
 }
 
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
 </style>
