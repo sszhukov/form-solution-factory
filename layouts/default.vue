@@ -31,10 +31,13 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
+    max-width: 720px;
+    margin: 0 auto;
+    position: relative;
   }
 
 .side-panel {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
 }

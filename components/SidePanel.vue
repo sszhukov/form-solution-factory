@@ -44,7 +44,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 350px;
+    height: 100vh;
     width: 100px;
     padding: 30px 0;
     font-size: 10px;
